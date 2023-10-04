@@ -9,7 +9,7 @@ def writeFile(content, name):
         w.write(content)
 
 def processFolder(path):
-    html = "<!doctype html><html><head><title>Snapchat Item Viewer</title"
+    html = "<!doctype html><html><head><title>Snapchat Item Viewer</title>"
     
     if os.path.exists(path + "/json"):
         # build profile info
@@ -27,11 +27,11 @@ def processFolder(path):
                 file_extension = file_extension.lower()
                 if file_extension == ".mp4":
                     html += "<br>"
-                    loc = "memories/" + file
+                    loc = path + "memories/" + file
                     html += f'<video width="360" height="640" controls><source src="{loc}" type="video/mp4">not support</video>'
                 else:
                     html += "<br>"
-                    loc = "memories/" + file
+                    loc = path + "memories/" + file
                     html += f"<img src='{loc}' />"
     return html
 
