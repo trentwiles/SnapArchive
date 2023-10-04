@@ -4,6 +4,10 @@ import json
 def readJSON(path):
     return json.loads(open(path).read())
 
+def writeFile(content, name):
+    with open(name, 'a') as w:
+        w.write(content)
+
 def processFolder(path):
     html = "<!doctype html><html><head><title>Snapchat Item Viewer</title"
     
@@ -14,8 +18,8 @@ def processFolder(path):
         name = x["Basic Information"]["Name"]
         creationDate = x["Basic Information"]["Creation Date"]
 
-        html += "</head><body><h1>{name} ({username})</h1>"
-        html += "<h2>Joined: {creationDate}</h2>"
+        html += f"</head><body><h1>{name} ({username})</h1>"
+        html += f"<h2>Joined: {creationDate}</h2>"
 
         if os.path.exists(path + "/memories"):
             for file in os.listdir(path + "/memories"):
@@ -24,9 +28,11 @@ def processFolder(path):
                 if file_extension == ".mp4":
                     html += "<br>"
                     loc = "memories/" + file
-                    html += '<video width="360" height="640" controls><source src="{loc}" type="video/mp4">not support</video>'
+                    html += f'<video width="360" height="640" controls><source src="{loc}" type="video/mp4">not support</video>'
                 else:
                     html += "<br>"
                     loc = "memories/" + file
-                    html += "<img src='{loc}' />"
+                    html += f"<img src='{loc}' />"
     return html
+
+writeFile(processFolder(r"C:\Users\ufhw8\Downloads\snapchat_sep2023-2_s1"), "new.html")
